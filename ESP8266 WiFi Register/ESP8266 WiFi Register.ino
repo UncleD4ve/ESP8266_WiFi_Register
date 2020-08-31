@@ -10,7 +10,7 @@ void setup()
 {
 	Serial.begin(115200);
 	yield();
-
+	
 	Serial.println(ESP.getFreeHeap(), DEC);
 
 	WiFiRegister WiFiController(DNS_SSID);
@@ -19,7 +19,7 @@ void setup()
 }
 void loop()
 {
-	yield();
+	yield(); 
 	//ESP.restart();
 }
 
