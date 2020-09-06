@@ -1,22 +1,20 @@
-#ifndef WiFiController_h
-#define WiFiController_h
+#ifndef WiFiRegister_h
+#define WiFiRegister_h
 #include "Arduino.h"
 #include "indexBegin.h"
 #include "indexEnd.h"
 #include "WiFiRegister.h"
-#include "EEPROMController.h"
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <DNSServer.h>
+#include "EEPROMController.h"
 
 class WiFiRegister {
 public:
 	WiFiRegister(const char*);
 	void begin();
-	void forceWifiERegister();
 private:
 	ESP8266WebServer _server;
-	EEPROMController eeprom;
 	DNSServer dnsServer;
 	WiFiClient _client;
 	String _ssid;

@@ -4,17 +4,6 @@ WiFiRegister::WiFiRegister(const char * ssid) :_server(80), _apName(ssid) {}
 
 void WiFiRegister::begin()
 {
-	if (!eeprom.getConfig())
-		forceWifiERegister();
-	else
-	{
-		Serial.println(F("Wifi has been set up!"));
-		eeprom.displayEEPROM();
-	}
-}
-
-void WiFiRegister::forceWifiERegister()
-{
 	Serial.println(ESP.getFreeHeap(), DEC);
 	WiFi.forceSleepWake();
 	delay(500);
@@ -107,6 +96,8 @@ void WiFiRegister::status()
 void WiFiRegister::restart()
 {
 	if (_status[0] == 'I')
+	{
+		EEPROMController eeprom;
 		if (eeprom.saveWifi(_ssid, _pass))
 			if (eeprom.setConfig(true)) {
 				Serial.println(F("Device is restarting!"));
@@ -117,6 +108,7 @@ void WiFiRegister::restart()
 			}
 			else
 				Serial.println(F("eeprom problem!"));
+	}
 	_server.send(200, F("text/html"), F("Server encountered an error"));
 }
 
